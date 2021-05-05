@@ -72,7 +72,14 @@
 
       function displayTable(vehicles) {
         const table = document.createElement("table");
-        table.classList.add("table", "is-bordered", "is-fullwidth");
+        table.classList.add(
+          "table",
+          "is-bordered",
+          "is-striped",
+          "is-narrow",
+          "is-hoverable",
+          "is-fullwidth"
+        );
         table.id = "vehicles";
 
         const thead = document.createElement("thead");
@@ -159,6 +166,7 @@
           .catch((err) => errorMessage(err));
       });
 
+      //   vehicles/lt
       document.getElementById("lt").addEventListener("click", () => {
         document.querySelectorAll("table").forEach((table) => {
           table.style.display = "none";
@@ -181,6 +189,7 @@
           .catch((err) => errorMessage(err));
       });
 
+      //   vehicles/lv
       document.getElementById("lv").addEventListener("click", () => {
         document.querySelectorAll("table").forEach((table) => {
           table.style.display = "none";
@@ -203,6 +212,7 @@
           .catch((err) => errorMessage(err));
       });
 
+      //   vehicles/ee
       document.getElementById("ee").addEventListener("click", () => {
         document.querySelectorAll("table").forEach((table) => {
           table.style.display = "none";
