@@ -110,7 +110,7 @@
         const country_location = event.target.elements.country.value;
 
         if ((model_id, number_plate, country_location)) {
-          fetch("https://citybee-back-2uzxb.ondigitalocean.app/models", {
+          fetch("https://citybee-back-2uzxb.ondigitalocean.app/vehicles", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
