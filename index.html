@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-link">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">View Models</h1>
+          <div class="buttons">
+            <a class="button is-info is-rounded" href="index.html"
+              >View Models</a
+            >
+            <a
+              class="button is-info is-rounded is-inverted"
+              href="addmodels.html"
+              >Add Models</a
+            >
+            <a
+              class="button is-info is-rounded is-inverted"
+              href="viewvehicles.html"
+              >View Vehicles</a
+            >
+            <a
+              class="button is-info is-rounded is-inverted"
+              href="addvehicles.html"
+              >Add Vehicles</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-5">1. Table "Models"</h2>
+          <table
+            id="models"
+            class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+          >
+            <thead>
+              <th class="is-info">ID</th>
+              <th class="is-link">Model</th>
+              <th class="is-info">Hour price EUR (kaina be PVM)</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-5">2. Table "Models Count"</h2>
+          <table
+            id="modelscount"
+            class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+          >
+            <thead>
+              <th class="is-info">Model</th>
+              <th class="is-link">Total Number of Cars</th>
+              <th class="is-info">Hour price EUR (kaina be PVM)</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <script defer>
+      fetch("https://citybee-back-2uzxb.ondigitalocean.app/models")
+        .then((res) => res.json())
+        .then((data) =>
+          data.forEach((item) => {
+            const tr = document.querySelector("#models > tbody").insertRow();
+
+            const td1 = tr.insertCell();
+            td1.textContent = item.id;
+
+            const td2 = tr.insertCell();
+            td2.textContent = item.name;
+
+            const td3 = tr.insertCell();
+            td3.textContent = item.hourprice;
+          })
+        );
+
+      fetch("https://citybee-back-2uzxb.ondigitalocean.app/modelscount")
+        .then((res) => res.json())
+        .then((data) =>
+          data.forEach((item) => {
+            const tr = document
+              .querySelector("#modelscount > tbody")
+              .insertRow();
+
+            const td1 = tr.insertCell();
+            td1.textContent = item.name;
+
+            const td2 = tr.insertCell();
+            td2.textContent = item.count;
+
+            const td3 = tr.insertCell();
+            td3.textContent = item.hourprice;
+          })
+        );
+    </script>
+  </body>
+</html>

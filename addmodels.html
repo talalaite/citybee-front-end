@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Models</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-link">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Add Models</h1>
+          <div class="buttons">
+            <a class="button is-info is-rounded is-inverted" href="index.html"
+              >View Models</a
+            >
+            <a class="button is-info is-rounded" href="addmodels.html"
+              >Add Models</a
+            >
+            <a
+              class="button is-info is-rounded is-inverted"
+              href="viewvehicles.html"
+              >View Vehicles</a
+            >
+            <a
+              class="button is-info is-rounded is-inverted"
+              href="addvehicles.html"
+              >Add Vehicles</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="title is-4">Add Model</h2>
+        <form name="add">
+          <div class="field">
+            <label class="label" for="name">Model name:</label>
+            <div class="control">
+              <input
+                class="input"
+                id="name"
+                type="text"
+                name="name"
+                placeholder="AUDI A3"
+                minlength="2"
+                maxlength="255"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="price"
+              >Hour price EUR (kaina be PVM)</label
+            >
+            <div>
+              <input
+                class="input"
+                id="price"
+                type="number"
+                name="price"
+                placeholder="3.25"
+                min="0.00"
+                max="99.99"
+                step="0.01"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <button class="button is-link is-rounded">Add Model</button>
+          </div>
+        </form>
+      </div>
+
+      <script defer>
+        function errorMessage(error) {
+          const errorMessage = document.createElement("h2");
+          errorMessage.textContent = error;
+
+          document.querySelector(".section > .container").append(errorMessage);
+        }
+
+        document.forms.add.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const name = event.target.elements.name.value.trim();
+          const hourprice = Number(event.target.elements.price.value);
+
+          if ((name, hourprice)) {
+            fetch("https://citybee-back-2uzxb.ondigitalocean.app/models", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ name, hourprice }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                const notification = document.createElement("div");
+                notification.className = "notification is-info is-light";
+                const button = document.createElement("button");
+                button.className = "delete";
+                button.addEventListener("click", () => notification.remove());
+
+                if (data.insertId) {
+                  notification.textContent = "The model added succesfully";
+                  notification.append(button);
+                  document
+                    .querySelector(".section > .container")
+                    .prepend(notification);
+                } else {
+                  notification.textContent = data.error;
+                  notification.append(button);
+                  document
+                    .querySelector(".section > .container")
+                    .prepend(notification);
+                }
+              })
+              .catch((error) => errorMessage(error));
+          }
+          document.forms.add.reset();
+        });
+      </script>
+    </section>
+  </body>
+</html>
