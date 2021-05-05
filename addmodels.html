@@ -39,7 +39,7 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="title is-4">Add Model</h2>
+        <h3 class="title is-4">Add Model</h3>
         <form name="add">
           <div class="field">
             <label class="label" for="name">Model name:</label>
@@ -80,7 +80,7 @@
         </form>
       </div>
 
-      <script defer>
+      <script>
         function errorMessage(error) {
           const errorMessage = document.createElement("h2");
           errorMessage.textContent = error;
@@ -110,7 +110,7 @@
                 button.className = "delete";
                 button.addEventListener("click", () => notification.remove());
 
-                if (data.insertId) {
+                if (data.id) {
                   notification.textContent = "The model added succesfully";
                   notification.append(button);
                   document

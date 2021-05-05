@@ -80,18 +80,23 @@
         const theadRow = document.createElement("tr");
 
         const th1 = document.createElement("th");
+        th1.classList.add("is-link");
         th1.textContent = "ID";
 
         const th2 = document.createElement("th");
+        th2.classList.add("is-info");
         th2.textContent = "Model";
 
         const th3 = document.createElement("th");
+        th3.classList.add("is-link");
         th3.textContent = "Number Plate";
 
         const th4 = document.createElement("th");
+        th4.classList.add("is-info");
         th4.textContent = "	Hour price EUR (kaina su PVM)";
 
         const th5 = document.createElement("th");
+        th5.classList.add("is-link");
         th5.textContent = "Country";
 
         theadRow.append(th1, th2, th3, th4, th5);
